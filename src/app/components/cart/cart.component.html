@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="alert {{className}} fixed-top">{{msg}}</div>
+  <div class="container" *ngIf="cart.length === 0;">
+    <h5 class="text-center my-3">No Items in cart</h5>
+  </div>
+  <div class="container" *ngIf="cart.length > 0;">
+    <ul class="list-unstyled mt-5 mx-3 bg-light" *ngFor="let item of cart">
+      <li class="media">
+        <img class="mr-3" src="{{item.imageUrl}}" style="max-width: 13rem;">
+        <div class="media-body">
+          <h5 class="my-3 ">Price:
+            <span class="text-success">{{item.price | currency}}</span>
+          </h5>
+          <p class="card-text">{{item.description}}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Made By:
+              <a href="#" class="card-link">{{item.brand}}</a>
+            </li>
+            <li class="list-group-item">Category :
+              <a href="#" class="card-link">{{item.category}}</a>
+            </li>
+            <li class="list-group-item">
+              Quantity:
+              <p>
+                <a href="#" (click)="minusQuantity(item,$event)">
+                  <i class="fa fa-minus"></i>
+                </a>
+                {{item.quantity}}
+                <a href="#" (click)="addQuantity(item,$event)">
+                  <i class="fa fa-plus"></i>
+                </a>
+              </p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" (click)="removeItem(item, $event)">
+                <span class="badge badge-primary badge-pill">remove item</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div class="center-block">
+      <button class="btn btn-outline-danger my-3 mx-2" (click)="removeAll()">Clear Cart</button>
+      <h5 class="text-center my-3">TOTAL: {{total | currency}}</h5>
+      <button class="btn btn-lg btn-success btn-block my-3 mx-2">PLACE ORDER</button>
+    </div>
+
+  </div>
+</div>

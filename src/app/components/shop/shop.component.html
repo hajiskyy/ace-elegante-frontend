@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="alert {{className}} fixed-top">{{msg}}</div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-12 col-sm-12 col-md-8">
+      <form>
+        <div class="form-group">
+          <label for="sort">Sort By Category</label>
+          <select name="sort" class="custom-select" (change)="onSortChange($event)">
+            <option value="" selected>All</option>
+            <option value="scarf">Scarfs</option>
+            <option value="abaya">Abayas</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-4 col-sm-4 col-md-4" *ngFor="let prod of products">
+      <div class="card mb-4 box-shadow">
+        <img src="{{prod.imageUrl}}" alt="" class="card-img-top" style="display: block;">
+        <div class="card-body">
+          <strong>
+            <h4 class="card-title text-success">{{prod.price | currency}}</h4>
+          </strong>
+          <p class="card-text">{{prod.description}}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Made By:
+              <a href="#" class="card-link">{{prod.brand}}</a>
+            </li>
+            <li class="list-group-item">Category :
+              <a href="#" class="card-link">{{prod.category}}</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" (click)="addToCart(prod, $event)" class="card-link">
+                <i class="fa fa-cart-plus" style="font-size:25px;"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

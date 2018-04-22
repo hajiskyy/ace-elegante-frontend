@@ -1,0 +1,50 @@
+<div class="container">
+  <br><br>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-12 col-md-8 bg-light">
+      <br>
+      <h3 class="text-center">REGISTER BRAND</h3>
+      <form action="#" method="post" (submit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Enter E-mail</label>
+          <input type="email" name="email" id="email"  class="form-control" [(ngModel)]="email" validate>
+        </div>
+        <div class="form-group">
+          <label for="FirstName">FirstName</label>
+          <input type="text" [(ngModel)]="ownerFirstName" name="ownerFirstName"  id="FirstName"  class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="LastName">LastName</label>
+          <input type="text" [(ngModel)]="ownerLastName"  name="OwnerLastName" id="LastName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">Enter Password</label>
+          <input type="password" [(ngModel)]="password" name="password" id="password" class="form-control" validate>
+        </div>
+        <div class="form-group">
+          <label for="Brand">Brand</label>
+          <input type="text" [(ngModel)]="brandName" name="brandName" id="brand" class="form-control" validate>
+        </div>
+        <div class="form-group">
+          <label for="phone">Company Phone Number</label>
+          <input type="tel" [(ngModel)]="phone" name="phone" id="phone" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="file" class="custom-file-input" name="file" (change)="changeFile($event)" id="logo">
+          <label class="custom-file-label" for="logo">Brand Logo</label>
+        </div>
+        <div class="form-group">
+          <label for="Company Address">Company address</label>
+          <input type="text" name="address" id="address" [(ngModel)]="address" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="weburl">Company Web adress</label>
+          <input type="text" name="url" id="weburl" [(ngModel)]="url" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="REGISTER" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
