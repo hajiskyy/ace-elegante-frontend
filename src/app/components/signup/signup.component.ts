@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   password: string;
   email: string;
 
-  constructor(private userServive: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
 
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
       password: this.password,
       email: this.email
     }
-    this.userServive.registerUser(user).subscribe(res => {
+    this.userService.registerUser(user).subscribe(res => {
       if(res.success){
         console.log(res);
         this.router.navigate(['login']);

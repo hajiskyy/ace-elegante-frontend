@@ -44,6 +44,7 @@ export class BsignupComponent implements OnInit {
       if(res.success){
         this.router.navigate(['login']);
       } else {
+        console.log(res);
           // send message error message
       }
     })

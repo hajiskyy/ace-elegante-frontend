@@ -19,6 +19,8 @@ import { AboutComponent } from './components/about/about.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UserService } from './services/user.service';
+import { AddproductsComponent } from './components/addproducts/addproducts.component';
+import { ViewproductsComponent } from './components/viewproducts/viewproducts.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -48,7 +50,9 @@ const appRoutes: Routes = [
     CartComponent,
     AboutComponent,
     ShopComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    AddproductsComponent,
+    ViewproductsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
