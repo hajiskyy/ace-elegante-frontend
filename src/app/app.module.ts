@@ -18,6 +18,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -55,7 +56,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ProductsService, BrandService],
+  providers: [ProductsService, BrandService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
