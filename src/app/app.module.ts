@@ -31,6 +31,8 @@ const appRoutes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'about', component: AboutComponent },
   { path: 'shop', component: ShopComponent },
+  { path: 'addproducts', component: AddproductsComponent },
+  { path: 'products', component: ViewproductsComponent},
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'

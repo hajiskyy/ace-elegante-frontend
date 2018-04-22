@@ -6,5 +6,6 @@ export interface Products{
     price: number,
     brand: string,
     imageUrl: string,
-    quantity: number
+    availability: boolean,
+    discount: number
   }

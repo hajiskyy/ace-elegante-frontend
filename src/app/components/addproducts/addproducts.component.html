@@ -1,3 +1,47 @@
-<p>
-  addproducts works!
-</p>
+<div class="container">
+  <div class="row justify-content-center mt-5 bg-light">
+    <h6 class="mt-3">Enter New Product details</h6>
+    <div class="col-md-12 mx-auto">
+      <form action="#" method="post" (submit)="onSubmit()">
+        <div class="form-group">
+          <label class="custom-file-label" for="logo">Product Image</label>
+          <input type="file" class="custom-file-input" name="file" (change)="onChangeFile($event)" id="logo">
+        </div>
+        <div class="form-group">
+          <label for="name">Enter Product Name</label>
+          <input type="text" name="name" [(ngModel)]="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Enter Description</label>
+          <input type="text" name="description" [(ngModel)]="description" id="description" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="category">category</label>
+          <select name="sort" class="custom-select" (change)="onCategoryChange($event)">
+            <option value="" selected>All</option>
+            <option value="scarf">Scarfs</option>
+            <option value="abaya">Abayas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" name="price" [(ngModel)]="price" id="price" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="availablity">Available?</label>
+          <select name="availablity" class="custom-select" (change)="onAvailabilityChange($event)">
+            <option value="yes" selected>Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="discount">discount percentage</label>
+          <input type="number" name="discount" [(ngModel)]="discount" id="" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="ADD" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

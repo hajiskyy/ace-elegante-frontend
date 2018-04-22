@@ -16,24 +16,31 @@ export class ShopComponent implements OnInit {
   constructor(private prodService: ProductsService) { }
 
   ngOnInit() {
-    this.products = this.prodService.getProducts();
+    this.setProducts();
     this.className = "";
     this.msg = "";
   }
+  setProducts(){
+    this.prodService.getProducts().subscribe(products => {
+      this.products = products;
+    });
+  }
 
   onSortChange(event: any){
-    this.products = this.prodService.sortProducts(event.target.value);
+    this.prodService.sortProducts(event.target.value).subscribe(products => {
+      this.products = products;
+    });
   }
 
-  addToCart(product: Products, e){
-    e.preventDefault();
-    this.prodService.addToCart(product);
-    this.className = "alert-success";
-    this.msg = "Added to cart";
-    setTimeout(() => {
-      this.className = "";
-      this.msg = "";
-    }, 1000);
-  }
+  // addToCart(product: Products, e){
+  //   e.preventDefault();
+  //   this.prodService.addToCart(product);
+  //   this.className = "alert-success";
+  //   this.msg = "Added to cart";
+  //   setTimeout(() => {
+  //     this.className = "";
+  //     this.msg = "";
+  //   }, 1000);
+  // }
 
 }
