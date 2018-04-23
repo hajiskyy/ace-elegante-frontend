@@ -21,6 +21,9 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { UserService } from './services/user.service';
 import { AddproductsComponent } from './components/addproducts/addproducts.component';
 import { ViewproductsComponent } from './components/viewproducts/viewproducts.component';
+import { OrdersService } from './services/orders.service';
+import { OrdersComponent } from './components/orders/orders.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -32,8 +35,10 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'addproducts', component: AddproductsComponent },
-  { path: 'products', component: ViewproductsComponent},
-  { path: '',
+  { path: 'products', component: ViewproductsComponent },
+  { path: 'orders', component: OrdersComponent },
+  {
+    path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
@@ -54,7 +59,9 @@ const appRoutes: Routes = [
     ShopComponent,
     PagenotfoundComponent,
     AddproductsComponent,
-    ViewproductsComponent
+    ViewproductsComponent,
+    OrdersComponent,
+    DashboardComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -62,7 +69,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ProductsService, BrandService, UserService],
+  providers: [ProductsService, BrandService, UserService, OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

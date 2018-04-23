@@ -6,18 +6,18 @@
   <div class="container" *ngIf="cart.length > 0;">
     <ul class="list-unstyled mt-5 mx-3 bg-light" *ngFor="let item of cart">
       <li class="media">
-        <img class="mr-3" src="{{item.imageUrl}}" style="max-width: 13rem;">
+        <img class="mr-3" src="{{item.product.imageUrl}}" style="max-width: 13rem;">
         <div class="media-body">
           <h5 class="my-3 ">Price:
-            <span class="text-success">{{item.price | currency}}</span>
+            <span class="text-success">{{item.product.price | currency}}</span>
           </h5>
-          <p class="card-text">{{item.description}}</p>
+          <p class="card-text">{{item.product.description}}</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Made By:
-              <a href="#" class="card-link">{{item.brand}}</a>
+              <a href="#" class="card-link">{{item.product.brand}}</a>
             </li>
             <li class="list-group-item">Category :
-              <a href="#" class="card-link">{{item.category}}</a>
+              <a href="#" class="card-link">{{item.product.category}}</a>
             </li>
             <li class="list-group-item">
               Quantity:

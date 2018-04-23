@@ -43,7 +43,7 @@ export class AddproductsComponent implements OnInit {
     fd.append('category', this.category);
     fd.append('availability', this.availability);
     // Check Here
-    fd.append('brand', 'hajai');
+    fd.append('brand', 'kamai');
     fd.append('file', this.file);
 
     this.prodcutService.addProduct(fd).subscribe(res => {

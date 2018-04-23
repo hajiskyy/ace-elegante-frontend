@@ -32,15 +32,15 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  // addToCart(product: Products, e){
-  //   e.preventDefault();
-  //   this.prodService.addToCart(product);
-  //   this.className = "alert-success";
-  //   this.msg = "Added to cart";
-  //   setTimeout(() => {
-  //     this.className = "";
-  //     this.msg = "";
-  //   }, 1000);
-  // }
+  addToCart(product: Products, e){
+    e.preventDefault();
+    this.prodService.addToCart(product);
+    this.className = "alert-success";
+    this.msg = "Added to cart";
+    setTimeout(() => {
+      this.className = "";
+      this.msg = "";
+    }, 1000);
+  }
 
 }
