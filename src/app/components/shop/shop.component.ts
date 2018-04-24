@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Products } from "../../models/Products";
 import { ProductsService } from "../../services/products.service";
+import { FlashMessagesService } from "angular2-flash-messages";
 import { Url } from 'url';
 
 @Component({
@@ -13,7 +14,7 @@ export class ShopComponent implements OnInit {
   msg: string;
   className: string
 
-  constructor(private prodService: ProductsService) { }
+  constructor(private prodService: ProductsService, private flash: FlashMessagesService) { }
 
   ngOnInit() {
     this.setProducts();
@@ -35,12 +36,7 @@ export class ShopComponent implements OnInit {
   addToCart(product: Products, e){
     e.preventDefault();
     this.prodService.addToCart(product);
-    this.className = "alert-success";
-    this.msg = "Added to cart";
-    setTimeout(() => {
-      this.className = "";
-      this.msg = "";
-    }, 1000);
+    this.flash.show('Added to Cart',{ cssClass: 'alert-info', timeout: 3000 })
   }
 
 }

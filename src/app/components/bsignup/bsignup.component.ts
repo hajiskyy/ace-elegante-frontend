@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from "../../services/brand.service";
 import { Router } from "@angular/router";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-bsignup',
@@ -18,7 +19,7 @@ export class BsignupComponent implements OnInit {
   phone: string;
   url: string;
   file: File;
-  constructor(private brandService: BrandService, private router: Router) { }
+  constructor(private brandService: BrandService, private router: Router, private flash: FlashMessagesService) { }
 
   ngOnInit() {
   }
@@ -42,10 +43,10 @@ export class BsignupComponent implements OnInit {
 
     this.brandService.registerBrand(fd).subscribe(res => {
       if(res.success){
+        this.flash.show('Brand Registered, You can now log in',{ cssClass: 'alert-success', timeout: 3000 })
         this.router.navigate(['login']);
       } else {
-        console.log(res);
-          // send message error message
+        this.flash.show('Somehting went wrong',{ cssClass: 'alert-danger', timeout: 3000 })
       }
     })
   }

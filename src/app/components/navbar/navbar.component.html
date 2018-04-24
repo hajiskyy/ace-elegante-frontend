@@ -18,10 +18,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!status.auth().seller">
           <a class="nav-link" routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Shop</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!status.auth().seller">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
       </ul>
@@ -29,13 +29,22 @@
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign Up</a>
         </li> -->
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!status.auth().seller && !status.auth().buyer">
           <a class="nav-link" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign in</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="status.auth().seller || status.auth().buyer">
+            <a class="nav-link" (click)="onLogOut()">Log out</a>
+          </li>
+        <li class="nav-item" *ngIf="!status.auth().seller">
           <a class="nav-link" routerLink="/cart" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <i class="fa fa-shopping-cart" style="font-size:20px;"></i>
           </a>
+        </li>
+        <li class="nav-item" *ngIf="status.auth().seller">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="status.auth().seller">
+          <a class="nav-link" routerLink="/orders" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Orders</a>
         </li>
       </ul>
     </div>

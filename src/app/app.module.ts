@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/Forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from '@angular/router';
+import { FlashMessagesModule } from "angular2-flash-messages";
 import { ProductsService } from "./services/products.service";
 import { BrandService } from "./services/brand.service";
 
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'addproducts', component: AddproductsComponent },
   { path: 'products', component: ViewproductsComponent },
   { path: 'orders', component: OrdersComponent },
+  { path: 'dashboard', component: DashboardComponent },
   {
     path: '',
     redirectTo: '/home',
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    FlashMessagesModule.forRoot(),
     FormsModule,
     HttpClientModule
   ],

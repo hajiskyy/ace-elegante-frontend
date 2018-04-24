@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cart } from "../../models/Cart";
 import { ProductsService } from "../../services/products.service";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,7 @@ export class CartComponent implements OnInit {
   total: number;
   className: string;
   msg: string;
-  constructor(private prodService: ProductsService) { }
+  constructor(private prodService: ProductsService, private flash: FlashMessagesService) { }
 
   ngOnInit() {
     this.total = 0; //start total at zero
@@ -67,7 +68,7 @@ export class CartComponent implements OnInit {
     this.gettotal(this.cart); // calculate total
 
     //display notification
-    this.alert("alert-info", "Item Removed" );
+    this.flash.show('Item removed',{ cssClass: 'alert-info', timeout: 3000 })
   }
 
   // Remove all items
@@ -78,19 +79,8 @@ export class CartComponent implements OnInit {
       // reset total
       this.total = 0;
       //display notification
-      this.alert("alert-info", "All items removed");
+      this.flash.show('All items removed',{ cssClass: 'alert-success', timeout: 3000 })
     }
-  }
-
-  // Notifcation
-  alert(className: string, msg: string) {  
-     this.className = className
-     this.msg = msg;
-
-     setTimeout(() => {
-       this.className = "";
-       this.msg = "";
-     }, 2000);
   }
 
 }

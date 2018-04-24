@@ -9,11 +9,10 @@ import { Observable } from "rxjs/Observable";
 export class OrdersService {
   brand: string;
   constructor(private http: HttpClient) {
-    this.brand = 'hajai';
    }
-  getOrder(): Observable<any[]>{
+  getOrder(brand: string): Observable<any[]>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any[]>(`http://localhost:5000/order/getorders/${this.brand}`, {headers: headers});
+    return this.http.get<any[]>(`http://localhost:5000/order/getorders/${brand}`, {headers: headers});
   }
 
 }

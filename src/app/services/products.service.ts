@@ -23,7 +23,11 @@ export class ProductsService {
 
   sortProducts(sort: string) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any>(`http://localhost:5000/products/getproducts/${sort}`, {headers: headers})
+    return this.http.get<any>(`http://localhost:5000/products/getproductsCategory/${sort}`, {headers: headers})
+  }
+  getProductsByBrand(brand: string) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`http://localhost:5000/products/getproductsBrand/${brand}`, {headers: headers})
   }
 
   addToCart(product: Products){

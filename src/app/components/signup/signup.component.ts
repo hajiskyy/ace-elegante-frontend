@@ -3,6 +3,7 @@ import { UserService } from "../../services/user.service";
 import { user } from "../../models/User";
 import { res } from "../../models/message";
 import { Router } from '@angular/router';
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
   password: string;
   email: string;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private flash: FlashMessagesService) { }
 
   ngOnInit() {
 
@@ -29,10 +30,10 @@ export class SignupComponent implements OnInit {
     }
     this.userService.registerUser(user).subscribe(res => {
       if(res.success){
-        console.log(res);
+        this.flash.show('You are now Registered and can now log in',{ cssClass: 'alert-success', timeout: 3000 })
         this.router.navigate(['login']);
       } else {
-        console.log(res);
+        this.flash.show('Something went wrong',{ cssClass: 'alert-danger', timeout: 3000 })
       }
     })
   }
