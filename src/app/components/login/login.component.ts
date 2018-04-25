@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     }
     this.userService.login(login).subscribe(res => {
       if(res.success){
-        this.user = res.user;
         if(res.user.hasBrand){
           this.userService.loggedIn("seller");
           this.userService.setbrand(res.brand);
@@ -33,6 +32,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['dashboard']);
         } else {
           this.userService.loggedIn("buyer");
+          localStorage.setItem('user',JSON.stringify(res.user));
           this.flash.show('You are now logged in',{ cssClass: 'alert-success', timeout: 3000 })
           this.router.navigate(['shop']);
         }

@@ -44,6 +44,9 @@
           <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
         </li>
         <li class="nav-item" *ngIf="status.auth().seller">
+          <a class="nav-link" routerLink="/addproducts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Add Product</a>
+        </li>
+        <li class="nav-item" *ngIf="status.auth().seller">
           <a class="nav-link" routerLink="/orders" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Orders</a>
         </li>
       </ul>

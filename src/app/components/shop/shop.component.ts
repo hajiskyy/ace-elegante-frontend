@@ -21,22 +21,27 @@ export class ShopComponent implements OnInit {
     this.className = "";
     this.msg = "";
   }
-  setProducts(){
+  setProducts() {
     this.prodService.getProducts().subscribe(products => {
       this.products = products;
     });
   }
 
-  onSortChange(event: any){
-    this.prodService.sortProducts(event.target.value).subscribe(products => {
-      this.products = products;
-    });
+  onSortChange(event: any) {
+    if (event.target.value === "") {
+      this.ngOnInit();
+    } else {
+      this.prodService.sortProducts(event.target.value).subscribe(products => {
+        this.products = products;
+      });
+    }
+
   }
 
-  addToCart(product: Products, e){
+  addToCart(product: Products, e) {
     e.preventDefault();
     this.prodService.addToCart(product);
-    this.flash.show('Added to Cart',{ cssClass: 'alert-info', timeout: 3000 })
+    this.flash.show('Added to Cart', { cssClass: 'alert-info', timeout: 3000 })
   }
 
 }

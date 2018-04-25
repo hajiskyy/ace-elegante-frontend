@@ -38,15 +38,13 @@ export class ProductsService {
       product: product
     }
     this.cart.push(newCart);
-    console.log(this.cart);
+    localStorage.setItem('cart',JSON.stringify(this.cart));
   }
 
-  getCart(){
-    return this.cart;
-  }
+
 
   addProduct(product: FormData){
-    return this.http.post('http://localhost:5000/products/addproduct',product);
+    return this.http.post<any>('http://localhost:5000/products/addproduct',product);
   }
 
 }

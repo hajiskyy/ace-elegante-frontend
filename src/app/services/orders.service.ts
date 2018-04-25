@@ -15,4 +15,9 @@ export class OrdersService {
     return this.http.get<any[]>(`http://localhost:5000/order/getorders/${brand}`, {headers: headers});
   }
 
+  placeOrder(order:Order[]){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>('http://localhost:5000/order/place', order, {headers: headers});
+  }
+
 }

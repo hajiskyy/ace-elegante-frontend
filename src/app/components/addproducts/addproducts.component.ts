@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from "../../services/products.service";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { Router } from "@angular/router";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-addproducts',
@@ -16,7 +19,7 @@ export class AddproductsComponent implements OnInit {
   brand: string;
   file: File;
 
-  constructor(private prodcutService: ProductsService) { }
+  constructor(private prodcutService: ProductsService, private flash:FlashMessagesService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.availability = 'true';
@@ -43,12 +46,16 @@ export class AddproductsComponent implements OnInit {
     fd.append('category', this.category);
     fd.append('availability', this.availability);
     // Check Here
-    fd.append('brand', 'kamai');
+    fd.append('brand', this.userService.getbrand());
     fd.append('file', this.file);
 
     this.prodcutService.addProduct(fd).subscribe(res => {
-      // TODO
-      console.log(res);
+      if(res.success){
+        this.flash.show('Product Added',{ cssClass: 'alert-success', timeout: 3000 });
+        this.router.navigate(['dashboard'])
+      } else {
+        this.flash.show('Somehting went wrong',{ cssClass: 'alert-danger', timeout: 3000 })
+      }
     });
 
   }

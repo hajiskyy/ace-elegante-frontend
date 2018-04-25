@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class UserService {
   constructor(private http: HttpClient, private router: Router) {
   }
-  brand: string;
   buyer: boolean;
   seller: boolean;
 
@@ -21,13 +20,14 @@ export class UserService {
   }
   logOut() {
     this.loggedIn("out");
+    localStorage.clear();
     this.router.navigate(['home']);
   }
   setbrand(brand: string){
-    this.brand = brand;
+    localStorage.setItem('brand',brand);
   }
   getbrand() {
-    return this.brand;
+    return localStorage.getItem('brand');
   }
 
   loggedIn(user: string) {

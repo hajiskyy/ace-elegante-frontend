@@ -42,6 +42,7 @@ export class BsignupComponent implements OnInit {
       fd.append('file',this.file, this.file.name);
 
     this.brandService.registerBrand(fd).subscribe(res => {
+      console.log(res);
       if(res.success){
         this.flash.show('Brand Registered, You can now log in',{ cssClass: 'alert-success', timeout: 3000 })
         this.router.navigate(['login']);
