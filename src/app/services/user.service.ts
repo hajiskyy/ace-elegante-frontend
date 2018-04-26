@@ -32,24 +32,34 @@ export class UserService {
 
   loggedIn(user: string) {
     if (user === "buyer") {
-      this.buyer = true;
-      this.seller = false;
+      localStorage.setItem('logged','buyer');
     } else if(user === "seller") {
-      this.buyer = false;
-      this.seller = true;
-    } else {
-      this.buyer = false;
-      this.seller = false;
+      localStorage.setItem('logged','seller');
     }
   }
   auth(){
     let buyer: boolean;
     let seller: boolean;
-    
-    return {
-      buyer: this.buyer,
-      seller: this.seller
+    let logged = localStorage.getItem('logged');
+
+    if(logged === "buyer"){
+      return {
+        buyer: true,
+        seller: false
+      }
+    } else if (logged === "seller") {
+      return {
+        buyer: false,
+        seller: true
+      }
+    } else {
+      return {
+        buyer: false,
+        seller: false
+      }
     }
+    
+    
   }
 
 
