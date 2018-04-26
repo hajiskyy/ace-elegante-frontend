@@ -1,25 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h4 class="text-center my-3">Orders</h4>
-      <div class="table-responsive">
-        <table class="table text-primary">
-          <tr class="table-dark">
-            <th scope="col">Quantity</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category</th>
-            <th scope="col">Discount</th>
-          </tr>
-          <tr *ngFor="let item of order" class="my-3">
-            <td>{{item.quantity}}</td>
-            <td>{{item.product.name}}</td>
-            <td>{{item.product.price}}</td>
-            <td>{{item.product.category}}</td>
-            <td>{{item.product.discount}}</td>
-          </tr>
-        </table>
-      </div>
+      <h3 class="text-center my-3">Orders</h3>
+      <ul class="list-group text-primary" *ngFor="let item of order">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h6>Quantity</h6>
+          <span>{{item.quantity}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h6>Product Name</h6>
+          <span>{{item.product.name}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h6>Price</h6>
+          <span>{{item.product.price}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h6>Category</h6>
+          <span>{{item.product.category}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <h6>Discount</h6>
+          <span>{{item.product.discount}}</span>
+        </li>
+        <li class="list-group-item">
+          <ul class="list-group">
+            <h6>Customer Details</h6>
+            <li class="list-group-item d-flex justify-content-between align-items-center">Email <span>{{item.user.email}}</span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              First Name: <span>{{item.user.FirstName}}</span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Last Name: <span>{{item.user.LastName}}</span></li>
+          </ul>
+        </li>
+
+      </ul>
     </div>
   </div>
 

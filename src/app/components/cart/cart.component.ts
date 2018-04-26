@@ -109,24 +109,27 @@ export class CartComponent implements OnInit {
      order = {
       quantity: 1,
       brandName: "",
-      product :""
+      product :"",
+      user: ""
     }
     //update cart
     this.getCart();
+    let user = JSON.parse(localStorage.getItem('user')); 
     //loop and add needed cart info to order
     this.cart.forEach(item => {
       order = {
         quantity: item.quantity,
         brandName: item.product.brand,
-        product :item.product._id
+        product :item.product._id,
+        user: user._id
       }
+      console.log(order);
       this.order.push(order);
     });
 
     this.orderServe.placeOrder(this.order).subscribe(res => {
       if(res.success){
         this.flash.show(res.msg,{ cssClass: 'alert-success', timeout: 3000 });
-        //Clear cart and Order
         localStorage.removeItem('cart');
         this.cart = [];
         this.order = [];

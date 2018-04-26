@@ -9,11 +9,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ProductsService {
   products: any[];
   sorted: Products[];
-  cart: cart[];
   constructor(private http: HttpClient) {
     this.products = []
     this.sorted = [];
-    this.cart = [];
   }
 
   getProducts() {
@@ -31,14 +29,19 @@ export class ProductsService {
   }
 
   addToCart(product: Products){
+    let cart: cart[] = [];
+    if(JSON.parse(localStorage.getItem('cart')) !== null){
+      cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    
     let newCart: cart;
     newCart = {
       id: product._id,
       quantity: 1,
       product: product
     }
-    this.cart.push(newCart);
-    localStorage.setItem('cart',JSON.stringify(this.cart));
+    cart.push(newCart);
+    localStorage.setItem('cart',JSON.stringify(cart));
   }
 
 
