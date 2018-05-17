@@ -25,6 +25,8 @@ import { ViewproductsComponent } from './components/viewproducts/viewproducts.co
 import { OrdersService } from './services/orders.service';
 import { OrdersComponent } from './components/orders/orders.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BrandsComponent } from './components/brands/brands.component';
+import { ViewBrandProductsComponent } from './components/view-brand-products/view-brand-products.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,15 +38,15 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'addproducts', component: AddproductsComponent },
-  { path: 'products', component: ViewproductsComponent },
+  { path: 'product/:id', component: ViewproductsComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'dashboard', component: DashboardComponent },
-  {
-    path: '',
+  { path: 'brand/:brand', component: ViewBrandProductsComponent },
+  { path: 'brands', component: BrandsComponent },
+  { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
-  },
-  { path: '**', component: PagenotfoundComponent }
+  }
 ];
 
 @NgModule({
@@ -64,6 +66,8 @@ const appRoutes: Routes = [
     ViewproductsComponent,
     OrdersComponent,
     DashboardComponent,
+    BrandsComponent,
+    ViewBrandProductsComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

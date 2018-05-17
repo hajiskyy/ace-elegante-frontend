@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Products } from "../models/Products";
 import { cart } from "../models/Cart";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable } from "rxjs/Observable";
-// import 'rxjs/add/operator/map';
+import { Observable } from "rxjs/Observable";
+
 
 @Injectable()
 export class ProductsService {
@@ -15,17 +15,17 @@ export class ProductsService {
   }
 
   getProducts() {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-     return this.http.get<any>('http://localhost:5000/products/getproducts', {headers: headers})
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+     return this.http.get<any>('/products/getproducts')
   }
 
   sortProducts(sort: string) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any>(`http://localhost:5000/products/getproductsCategory/${sort}`, {headers: headers})
+    return this.http.get<any>(`/products/getproductsCategory/${sort}`, {headers: headers})
   }
   getProductsByBrand(brand: string) {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any>(`http://localhost:5000/products/getproductsBrand/${brand}`, {headers: headers})
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`/products/getproductsBrand/${brand}`);
   }
 
   addToCart(product: Products){
@@ -44,10 +44,22 @@ export class ProductsService {
     localStorage.setItem('cart',JSON.stringify(cart));
   }
 
+  getProductById(id: string){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`/products/getproduct/${id}`, {headers: headers});
+  }
 
+  getProductRating(product: string): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`/rating/${product}`, {headers: headers});
+  }
 
   addProduct(product: FormData){
-    return this.http.post<any>('http://localhost:5000/products/addproduct',product);
+    return this.http.post<any>('/products/addproduct',product);
+  }
+
+  addRating(rating: any){
+    return this.http.post<any>('/rating/add',rating);
   }
 
 }

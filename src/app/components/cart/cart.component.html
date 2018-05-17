@@ -1,6 +1,6 @@
 <div class="row">
   <div class="alert {{className}} fixed-top">{{msg}}</div>
-  <div class="container" *ngIf="cart.length === 0;">
+  <div class="container" *ngIf="cart === null || cart.length === 0;">
     <h5 class="text-center my-3">No Items in cart</h5>
   </div>
   <div class="container" *ngIf="cart.length > 0;">

@@ -28,16 +28,16 @@ export class LoginComponent implements OnInit {
         if(res.user.hasBrand){
           this.userService.loggedIn("seller");
           this.userService.setbrand(res.brand);
-          this.flash.show('You are now logged in',{ cssClass: 'alert-success', timeout: 3000 })
+          this.flash.show('You are now logged in',{ cssClass: 'alert-success', timeout: 2000 })
           this.router.navigate(['dashboard']);
         } else {
           this.userService.loggedIn("buyer");
           localStorage.setItem('user',JSON.stringify(res.user));
-          this.flash.show('You are now logged in',{ cssClass: 'alert-success', timeout: 3000 })
+          this.flash.show('You are now logged in',{ cssClass: 'alert-success', timeout: 2000 })
           this.router.navigate(['shop']);
         }
       }else{
-        this.flash.show('Wrong Password',{ cssClass: 'alert-danger', timeout: 3000 })
+        this.flash.show(res.msg,{ cssClass: 'alert-danger', timeout: 2000 })
 
       }
     })

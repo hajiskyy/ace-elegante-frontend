@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { cart } from "../../models/Cart";
 import { ProductsService } from "../../services/products.service";
 import { OrdersService } from "../../services/orders.service";
+import { UserService } from "../../services/user.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Order } from "../../models/Order";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -14,10 +16,17 @@ export class CartComponent implements OnInit {
   cart: cart[];
   total: number;
   order: Order[]
-  constructor(private prodService: ProductsService, private flash: FlashMessagesService, private orderServe: OrdersService) { }
+  constructor(
+    private prodService: ProductsService,
+    private flash: FlashMessagesService, 
+    private orderServe: OrdersService, 
+    private user: UserService, 
+    private router:Router
+  ) { }
 
   ngOnInit() {
     this.total = 0; //start total at zero
+    this.cart = [];
     // get cart items from cart
     this.getCart();
     this.gettotal(this.cart); // get initial total
@@ -32,12 +41,15 @@ export class CartComponent implements OnInit {
       this.total += item.product.price * item.quantity;
     });
   }
-  setCart(){
+  setCart() {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
-  getCart(){
-    this.cart =  this.cart = JSON.parse(localStorage.getItem('cart'))
+  getCart() {
+    if(localStorage.getItem('cart')){
+      this.cart = this.cart = JSON.parse(localStorage.getItem('cart'))
+    }
+    
   }
 
   // add quantity
@@ -59,7 +71,7 @@ export class CartComponent implements OnInit {
     e.preventDefault();
     this.cart.forEach(item => {
       if (cart.id === item.id) {
-        if(item.quantity >= 2){ // check if item quantity is at least 2
+        if (item.quantity >= 2) { // check if item quantity is at least 2
           --item.quantity;
         }
       }
@@ -71,11 +83,11 @@ export class CartComponent implements OnInit {
   }
 
   // Remove Item 
-  removeItem(cart: cart, e){
+  removeItem(cart: cart, e) {
     e.preventDefault();
-   this.getCart();
+    this.getCart();
     this.cart.forEach((cart, index) => {
-      if(cart.id === cart.id){
+      if (cart.id === cart.id) {
         this.cart.splice(index, 1);
       }
     });
@@ -87,58 +99,63 @@ export class CartComponent implements OnInit {
     this.gettotal(this.cart); // calculate total
 
     //display notification
-    this.flash.show('Item removed',{ cssClass: 'alert-info', timeout: 3000 })
+    this.flash.show('Item removed', { cssClass: 'alert-info', timeout: 3000 })
   }
 
   // Remove all items
-  removeAll(){
-    if(confirm('Are you sure?')){
+  removeAll() {
+    if (confirm('Are you sure?')) {
       // clear cart
       localStorage.removeItem('cart');
       this.cart = [];
       // reset total
       this.total = 0;
       //display notification
-      this.flash.show('All items removed',{ cssClass: 'alert-success', timeout: 3000 })
+      this.flash.show('All items removed', { cssClass: 'alert-success', timeout: 3000 });
     }
   }
 
-  placeOrder(){
-    // init order
-    let order: Order;
-     order = {
-      quantity: 1,
-      brandName: "",
-      product :"",
-      user: ""
-    }
-    //update cart
-    this.getCart();
-    let user = JSON.parse(localStorage.getItem('user')); 
-    //loop and add needed cart info to order
-    this.cart.forEach(item => {
+  placeOrder() {
+    if (!this.user.auth().buyer) {
+      this.flash.show('Log in to Place order', { cssClass: 'alert-info', timeout: 2000 });
+      this.router.navigate(['login']);
+    } else {
+      // init order
+      let order: Order;
       order = {
-        quantity: item.quantity,
-        brandName: item.product.brand,
-        product :item.product._id,
-        user: user._id
+        quantity: 1,
+        brandName: "",
+        product: "",
+        user: ""
       }
-      console.log(order);
-      this.order.push(order);
-    });
+      //update cart
+      this.getCart();
+      let user = JSON.parse(localStorage.getItem('user'));
+      //loop and add needed cart info to order
+      this.cart.forEach(item => {
+        order = {
+          quantity: item.quantity,
+          brandName: item.product.brand,
+          product: item.product._id,
+          user: user._id
+        }
+        this.order.push(order);
+      });
 
-    this.orderServe.placeOrder(this.order).subscribe(res => {
-      if(res.success){
-        this.flash.show(res.msg,{ cssClass: 'alert-success', timeout: 3000 });
-        localStorage.removeItem('cart');
-        this.cart = [];
-        this.order = [];
+      this.orderServe.placeOrder(this.order).subscribe(res => {
+        if (res.success) {
+          this.flash.show(res.msg, { cssClass: 'alert-success', timeout: 3000 });
+          localStorage.removeItem('cart');
+          this.cart = [];
+          this.order = [];
 
-      } else {
-        this.flash.show('Some thing went wrong',{ cssClass: 'alert-danger', timeout: 3000 });
-      }
-    })
-    
+        } else {
+          this.flash.show('Something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+        }
+      });
+    }
+
+
   }
 
 }

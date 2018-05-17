@@ -11,7 +11,11 @@ export class BrandService {
    }
 
    registerBrand(brand: FormData) {
-     return this.http.post<res>('http://localhost:5000/brand/addbrand',brand);
+     return this.http.post<res>('/brand/addbrand',brand);
+   }
+
+   getBrands(){
+     return this.http.get<any>('/brand/getbrands');
    }
 
 }

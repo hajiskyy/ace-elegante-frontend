@@ -18,7 +18,7 @@
   </div>
   <div class="row justify-content-center mb-3">
     <div class="card-deck" *ngFor="let prod of products">
-      <div class="card mx-4 mb-3" style="width: 16rem;">
+      <div class="card mx-4 mb-3" style="max-width: 16rem;">
         <div class="zoom">
           <img src="{{prod.imageUrl}}" alt="" class="card-img-top img-fluid" (click)="viewProduct(prod._id)">
         </div>
@@ -29,7 +29,7 @@
           <p class="card-text">{{prod.description}}</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Made By:
-              <a routerLink="/brand/{{brand}}" class="card-link">{{prod.brand}}</a>
+              <a href="#" class="card-link">{{prod.brand}}</a>
             </li>
             <li class="list-group-item">Category : {{prod.category}}
             </li>

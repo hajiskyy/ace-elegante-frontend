@@ -11,13 +11,13 @@ export class OrdersService {
   constructor(private http: HttpClient) {
    }
   getOrder(brand: string): Observable<any[]>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any[]>(`http://localhost:5000/order/getorders/${brand}`, {headers: headers});
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any[]>(`/order/getorders/${brand}`);
   }
 
   placeOrder(order:Order[]){
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<any>('http://localhost:5000/order/place', order, {headers: headers});
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>('/order/place', order);
   }
 
 }

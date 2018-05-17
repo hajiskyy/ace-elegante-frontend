@@ -1,3 +1,67 @@
-<p>
-  viewproducts works!
-</p>
+<div class="container">
+  <ul class="list-unstyled my-5" *ngIf="loaded">
+    <li class="media">
+      <img class="mr-3" style="max-width: 18rem;" src="{{product.imageUrl}}">
+      <div class="media-body">
+        <ul class="list-group text-primary list-group-flush">
+          <li class="list-group-item">
+            <h4 class="text-success">{{product.price | currency}}</h4>
+          </li>
+          <li class="list-group-item">
+            Product Name:
+            <h4>{{product.name}}</h4>
+          </li>
+          <li class="list-group-item">Desc:
+            <h4>{{product.description}}</h4>
+          </li>
+          <li class="list-group-item">Brand:
+            <h4>{{product.brand}}</h4>
+          </li>
+          <li class="list-group-item">
+            <a href="#" (click)="addToCart($event)" class="card-link">
+              <i class="fa fa-cart-plus" style="font-size:25px;"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <a href="#" (click)="addLike($event)">
+    <i class="fa fa-thumbs-up" style="font-size:40px;"></i>
+  </a>
+  <span>{{this.total}}</span>
+
+  <div class="row my-3">
+    <div class="col-md-12">
+      <form (submit)="onComment($event)">
+        <div class="form-group">
+          <label for="comment">Add A Comment</label>
+          <input type="text" [(ngModel)]="comment" placeholder="What do you think?" class="form-control" id="comment" name="comment">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Comment" class="btn btn-primary btn-block">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row my-5" *ngIf="hasComment">
+    <div class="col-md-12">
+      <h4 class="text-center text-primary my-5">Comments</h4>
+      <ul class="list-group  my-2 text-primary" *ngFor="let rating of ratings">
+        <li class="list-group-item" *ngIf="rating.comments != null">
+          <p>
+            <strong>{{rating.user.FirstName}} {{rating.user.LastName}}</strong>
+          </p>
+          <ul class="list-group my-2 list-group-flush">
+            <li class="list-group-item" >
+              {{rating.comments}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row" *ngIf="!hasComment">
+    <h6 class="text-center text-primary my-5">No Comments Yet</h6>
+  </div>
+</div>

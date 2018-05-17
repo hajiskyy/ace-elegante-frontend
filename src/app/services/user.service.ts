@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable } from "rxjs/Observable";
 import { res } from "../models/message";
 import { user } from "../models/User";
 import { Router } from '@angular/router';
@@ -13,10 +12,10 @@ export class UserService {
   seller: boolean;
 
   registerUser(user: user) {
-    return this.http.post<res>('http://localhost:5000/user/register', user);
+    return this.http.post<res>('/user/register', user);
   }
   login(user) {
-    return this.http.post<any>('http://localhost:5000/user/login', user);
+    return this.http.post<any>('/user/login', user);
   }
   logOut() {
     this.loggedIn("out");

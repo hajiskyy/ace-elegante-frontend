@@ -1,36 +1,37 @@
+import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { Component, OnInit } from '@angular/core';
-import { Products } from "../../models/Products";
 import { ProductsService } from "../../services/products.service";
 import { FlashMessagesService } from "angular2-flash-messages";
-import { Router } from "@angular/router";
-import { Url } from 'url';
+import { Products } from "../../models/Products";
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css']
+  selector: 'app-view-brand-products',
+  templateUrl: './view-brand-products.component.html',
+  styleUrls: ['./view-brand-products.component.css']
 })
-export class ShopComponent implements OnInit {
+export class ViewBrandProductsComponent implements OnInit {
   products: Products[];
-  msg: string;
-  className: string
-
+  param: string
   constructor(
-    private prodService: ProductsService, 
+    private activated: ActivatedRoute, 
+    private router: Router,
     private flash: FlashMessagesService,
-    private router: Router
+    private prodService: ProductsService
   ) { }
 
   ngOnInit() {
-    this.setProducts();
-    this.className = "";
-    this.msg = "";
-  }
-  
-  setProducts() {
-    this.prodService.getProducts().subscribe(products => {
+    this.activated.params.subscribe(param => {
+      this.param = param.brand
+      });
+    
+    this.prodService.getProductsByBrand(this.param).subscribe(products => {
       this.products = products;
     });
+
+  }
+
+  viewProduct(id){
+    this.router.navigate(['product',id]);
   }
 
   onSortChange(event: any) {
@@ -50,8 +51,5 @@ export class ShopComponent implements OnInit {
     this.flash.show('Added to Cart', { cssClass: 'alert-info', timeout: 3000 })
   }
 
-  viewProduct(id){
-    this.router.navigate(['product',id]);
-  }
 
 }
